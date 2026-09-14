@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Transportes Mayen´s: viajes seguros, cómodos y puntuales. Solicita tu viaje o cotización en línea."
+  />
+
+  <title>Transportes Mayen´s | Viajes seguros y cómodos</title>
+
+  <style>
+    :root {
+      --primario: #092c4c;
+      --primario-claro: #155684;
+      --secundario: #f5a623;
+      --secundario-oscuro: #d98600;
+      --fondo: #f4f7fa;
+      --blanco: #ffffff;
+      --texto: #182333;
+      --texto-suave: #5d6978;
+      --exito: #25d366;
+      --borde: #dce4ec;
+      --sombra: 0 15px 40px rgba(9, 44, 76, 0.12);
+      --radio: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--texto);
+      background: var(--fondo);
+      line-height: 1.6;
+    }
+
+    body.menu-abierto {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .contenedor {
+      width: min(1120px, 90%);
+      margin: 0 auto;
+    }
+
+    .seccion {
+      padding: 90px 0;
+    }
+
+    .seccion-clara {
+      background: var(--blanco);
+    }
+
+    .titulo-seccion {
+      max-width: 730px;
+      margin: 0 auto 45px;
+      text-align: center;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--secundario-oscuro);
+      font-size: 0.83rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .titulo-seccion h2 {
+      margin-bottom: 14px;
+      color: var(--primario);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .titulo-seccion p {
+      color: var(--texto-suave);
+      font-size: 1.05rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 13px 24px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      text-align: center;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primario {
+      color: var(--primario);
+      background: var(--secundario);
+    }
+
+    .btn-primario:hover {
+      background: #ffb942;
+    }
+
+    .btn-contorno {
+      color: var(--blanco);
+      border-color: rgba(255, 255, 255, 0.75);
+      background: transparent;
+    }
+
+    .btn-contorno:hover {
+      color: var(--primario);
+      background: var(--blanco);
+    }
+
+    .btn-whatsapp {
+      color: var(--blanco);
+      background: var(--exito);
+    }
+
+    .btn-instagram {
+      color: var(--blanco);
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+    }
+
+    .btn-correo {
+      color: var(--blanco);
+      background: #d93025;
+    }
+
+    /* Navegación */
+    .encabezado {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(9, 44, 76, 0.97);
+      backdrop-filter: blur(12px);
+    }
+
+    .navegacion {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--blanco);
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .logo-icono {
+      display: grid;
+      width: 43px;
+      height: 43px;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--primario);
+      background: var(--secundario);
+      font-size: 1.35rem;
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      list-style: none;
+    }
+
+    .menu a {
+      color: #eaf4fc;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--secundario);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 10px;
+      color: var(--blanco);
+      background: transparent;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    /* Inicio */
+    .inicio {
+      position: relative;
+      display: grid;
+      min-height: calc(100vh - 76px);
+      place-items: center;
+      overflow: hidden;
+      color: var(--blanco);
+      background: linear-gradient(
+          110deg,
+          rgba(5, 28, 50, 0.97),
+          rgba(9, 44, 76, 0.83)
+        ),
+        url("https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1800&q=85")
+          center / cover;
+    }
+
+    .inicio::after {
+      position: absolute;
+      right: -120px;
+      bottom: -170px;
+      width: 430px;
+      height: 430px;
+      border-radius: 50%;
+      background: rgba(245, 166, 35, 0.17);
+      content: "";
+    }
+
+    .inicio-contenido {
+      position: relative;
+      z-index: 1;
+      max-width: 790px;
+      padding: 80px 0;
+    }
+
+    .inicio h1 {
+      margin-bottom: 22px;
+      font-size: clamp(2.7rem, 7vw, 5.5rem);
+      line-height: 0.98;
+    }
+
+    .inicio h1 span {
+      color: var(--secundario);
+    }
+
+    .inicio p {
+      max-width: 680px;
+      margin-bottom: 31px;
+      color: #e1ebf3;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .botones-inicio {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .ventajas {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 50px;
+    }
+
+    .ventaja {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.17);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(6px);
+    }
+
+    .ventaja strong {
+      display: block;
+      color: var(--secundario);
+      font-size: 1.08rem;
+    }
+
+    .ventaja span {
+      color: #dbe7f0;
+      font-size: 0.92rem;
+    }
+
+    /* Servicios */
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .tarjeta {
+      padding: 30px;
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      background: var(--blanco);
+      box-shadow: 0 10px 30px rgba(9, 44, 76, 0.07);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--sombra);
+    }
+
+    .tarjeta-icono {
+      display: grid;
+      width: 58px;
+      height: 58px;
+      margin-bottom: 22px;
+      place-items: center;
+      border-radius: 16px;
+      color: var(--primario);
+      background: #fff0d4;
+      font-size: 1.65rem;
+    }
+
+    .tarjeta h3 {
+      margin-bottom: 9px;
+      color: var(--primario);
+      font-size: 1.27rem;
+    }
+
+    .tarjeta p {
+      color: var(--texto-suave);
+    }
+
+    /* Formulario */
+    .cotizacion-contenido {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 45px;
+      align-items: start;
+    }
+
+    .cotizacion-info {
+      padding-top: 25px;
+    }
+
+    .cotizacion-info h2 {
+      margin-bottom: 18px;
+      color: var(--primario);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.12;
+    }
+
+    .cotizacion-info p {
+      margin-bottom: 25px;
+      color: var(--texto-suave);
+    }
+
+    .pasos {
+      display: grid;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .pasos li {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+    }
+
+    .numero {
+      display: grid;
+      flex: 0 0 35px;
+      width: 35px;
+      height: 35px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--primario);
+      background: var(--secundario);
+      font-weight: 800;
+    }
+
+    .formulario {
+      padding: 35px;
+      border-radius: var(--radio);
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+    }
+
+    .formulario h3 {
+      margin-bottom: 22px;
+      color: var(--primario);
+      font-size: 1.55rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .campo {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .campo-completo {
+      grid-column: 1 / -1;
+    }
+
+    .campo label {
+      color: var(--primario);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .campo input,
+    .campo select,
+    .campo textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      outline: none;
+      color: var(--texto);
+      background: #fbfdff;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .campo textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .campo input:focus,
+    .campo select:focus,
+    .campo textarea:focus {
+      border-color: var(--primario-claro);
+      box-shadow: 0 0 0 4px rgba(21, 86, 132, 0.1);
+    }
+
+    .formulario .btn {
+      width: 100%;
+      margin-top: 20px;
+      border: 0;
+    }
+
+    .aviso-formulario {
+      margin-top: 12px;
+      color: var(--texto-suave);
+      font-size: 0.83rem;
+      text-align: center;
+    }
+
+    /* Equipo */
+    .equipo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .miembro {
+      overflow: hidden;
+      border-radius: var(--radio);
+      background: var(--blanco);
+      box-shadow: 0 10px 30px rgba(9, 44, 76, 0.09);
+      text-align: center;
+    }
+
+    .miembro-imagen {
+      display: grid;
+      height: 220px;
+      place-items: center;
+      color: var(--blanco);
+      background: linear-gradient(135deg, var(--primario), var(--primario-claro));
+      font-size: 4rem;
+    }
+
+    .miembro-info {
+      padding: 25px;
+    }
+
+    .miembro h3 {
+      color: var(--primario);
+    }
+
+    .miembro .cargo {
+      display: block;
+      margin: 4px 0 11px;
+      color: var(--secundario-oscuro);
+      font-weight: 700;
+    }
+
+    .miembro p {
+      color: var(--texto-suave);
+      font-size: 0.94rem;
+    }
+
+    /* Acerca de */
+    .acerca-contenido {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 55px;
+      align-items: center;
+    }
+
+    .acerca-imagen {
+      position: relative;
+      min-height: 420px;
+      border-radius: 24px;
+      background: linear-gradient(
+          rgba(9, 44, 76, 0.12),
+          rgba(9, 44, 76, 0.12)
+        ),
+        url("https://images.unsplash.com/photo-1570125909232-eb263c188f7e?auto=format&fit=crop&w=1200&q=85")
+          center / cover;
+      box-shadow: var(--sombra);
+    }
+
+    .experiencia {
+      position: absolute;
+      right: -18px;
+      bottom: 25px;
+      padding: 20px 23px;
+      border-radius: 16px;
+      color: var(--primario);
+      background: var(--secundario);
+      font-weight: 800;
+      box-shadow: var(--sombra);
+    }
+
+    .acerca-texto h2 {
+      margin-bottom: 18px;
+      color: var(--primario);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+    }
+
+    .acerca-texto p {
+      margin-bottom: 15px;
+      color: var(--texto-suave);
+    }
+
+    .valores {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .valor {
+      padding: 14px;
+      border-left: 4px solid var(--secundario);
+      border-radius: 8px;
+      background: #f6f9fc;
+      color: var(--primario);
+      font-weight: 700;
+    }
+
+    /* Contacto */
+    .contacto {
+      color: var(--blanco);
+      background: var(--primario);
+    }
+
+    .contacto .titulo-seccion h2,
+    .contacto .titulo-seccion p {
+      color: var(--blanco);
+    }
+
+    .contacto-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .contacto-item {
+      display: flex;
+      flex-direction: column;
+      min-height: 230px;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radio);
+      background: rgba(255, 255, 255, 0.07);
+      text-align: center;
+    }
+
+    .contacto-item .icono {
+      margin-bottom: 12px;
+      font-size: 2rem;
+    }
+
+    .contacto-item h3 {
+      margin-bottom: 6px;
+    }
+
+    .contacto-item p {
+      margin-bottom: 20px;
+      color: #d9e5ee;
+      overflow-wrap: anywhere;
+    }
+
+    .contacto-item .btn {
+      width: 100%;
+      max-width: 220px;
+    }
+
+    /* Pie */
+    .pie {
+      padding: 24px 0;
+      color: #cbd9e5;
+      background: #051d31;
+      text-align: center;
+    }
+
+    .pie p {
+      font-size: 0.91rem;
+    }
+
+    /* Botón flotante */
+    .whatsapp-flotante {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 900;
+      display: grid;
+      width: 60px;
+      height: 60px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--blanco);
+      background: var(--exito);
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.38);
+      font-size: 1.7rem;
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-flotante:hover {
+      transform: scale(1.08);
+    }
+
+    @media (max-width: 900px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .menu {
+        position: fixed;
+        inset: 76px 0 auto 0;
+        display: none;
+        flex-direction: column;
+        max-height: calc(100vh - 76px);
+        align-items: stretch;
+        gap: 0;
+        overflow-y: auto;
+        padding: 20px 5%;
+        background: var(--primario);
+      }
+
+      .menu.activo {
+        display: flex;
+      }
+
+      .menu li {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .menu a {
+        display: block;
+        padding: 16px 5px;
+      }
+
+      .servicios-grid,
+      .equipo-grid,
+      .contacto-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .cotizacion-contenido,
+      .acerca-contenido {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .seccion {
+        padding: 70px 0;
+      }
+
+      .inicio {
+        min-height: auto;
+      }
+
+      .inicio-contenido {
+        padding: 85px 0 70px;
+      }
+
+      .ventajas,
+      .servicios-grid,
+      .equipo-grid,
+      .contacto-grid,
+      .form-grid,
+      .valores {
+        grid-template-columns: 1fr;
+      }
+
+      .botones-inicio {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .formulario {
+        padding: 24px 18px;
+      }
+
+      .acerca-imagen {
+        min-height: 330px;
+      }
+
+      .experiencia {
+        right: 12px;
+        bottom: 12px;
+      }
+
+      .logo-texto {
+        font-size: 1.05rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navegación -->
+  <header class="encabezado">
+    <nav class="navegacion contenedor" aria-label="Navegación principal">
+      <a class="logo" href="#inicio" aria-label="Transportes Mayen, ir al inicio">
+        <span class="logo-icono">TM</span>
+        <span class="logo-texto">Transportes Mayen</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        ☰
+      </button>
+
+      <ul class="menu" id="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Menú</a></li>
+        <li><a href="#cotizacion">Viajes y cotizaciones</a></li>
+        <li><a href="#equipo">Equipo de trabajo</a></li>
+        <li><a href="#acerca">Acerca de</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Inicio -->
+    <section class="inicio" id="inicio">
+      <div class="contenedor">
+        <div class="inicio-contenido">
+          <span class="etiqueta">Tu destino comienza con nosotros</span>
+
+          <h1>
+            Viaja seguro con
+            <span>Transportes Mayen</span>
+          </h1>
+
+          <p>
+            Transporte de personas con comodidad, puntualidad y atención
+            personalizada. Realizamos traslados locales, viajes turísticos,
+            servicios empresariales y recorridos especiales.
+          </p>
+
+          <div class="botones-inicio">
+            <a class="btn btn-primario" href="#cotizacion">
+              Solicitar viaje
+            </a>
+
+            <a
+              class="btn btn-contorno enlace-whatsapp"
+              href="https://wa.me/50257962304?text=Hola%2C%20Transportes%20Mayen.%20Deseo%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contactar por WhatsApp
+            </a>
+          </div>
+
+          <div class="ventajas">
+            <div class="ventaja">
+              <strong>Seguridad</strong>
+              <span>Conductores responsables y unidades cuidadas.</span>
+            </div>
+
+            <div class="ventaja">
+              <strong>Puntualidad</strong>
+              <span>Respetamos tus horarios y tus compromisos.</span>
+            </div>
+
+            <div class="ventaja">
+              <strong>Comodidad</strong>
+              <span>Disfruta un traslado tranquilo y agradable.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menú de servicios -->
+    <section class="seccion" id="servicios">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Menú de servicios</span>
+          <h2>Soluciones de transporte para cada ocasión</h2>
+          <p>
+            Elige el servicio que necesitas y solicita una cotización
+            personalizada.
+          </p>
+        </div>
+
+        <div class="servicios-grid">
+          <article class="tarjeta">
+            <div class="tarjeta-icono">🚐</div>
+            <h3>Viajes particulares</h3>
+            <p>
+              Traslados cómodos y seguros para personas, familias o grupos.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="tarjeta-icono">🏢</div>
+            <h3>Transporte empresarial</h3>
+            <p>
+              Movilidad para colaboradores, reuniones, congresos y eventos.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="tarjeta-icono">✈️</div>
+            <h3>Traslados al aeropuerto</h3>
+            <p>
+              Llegadas y salidas programadas con atención puntual.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="tarjeta-icono">🏖️</div>
+            <h3>Viajes turísticos</h3>
+            <p>
+              Recorridos para conocer destinos con tranquilidad y comodidad.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="tarjeta-icono">🎉</div>
+            <h3>Eventos especiales</h3>
+            <p>
+              Transporte para bodas, celebraciones y actividades familiares.
+            </p>
+          </article>
+
+          <article class="tarjeta">
+            <div class="tarjeta-icono">🗺️</div>
+            <h3>Viajes personalizados</h3>
+            <p>
+              Planeamos rutas y horarios adaptados a tus necesidades.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cotización -->
+    <section class="seccion seccion-clara" id="cotizacion">
+      <div class="contenedor cotizacion-contenido">
+        <div class="cotizacion-info">
+          <span class="etiqueta">Reserva o cotiza</span>
+          <h2>Solicita tu viaje en pocos minutos</h2>
+
+          <p>
+            Completa los datos del recorrido. Al enviar el formulario se
+            abrirá WhatsApp con tu solicitud lista para enviarse.
+          </p>
+
+          <ol class="pasos">
+            <li>
+              <span class="numero">1</span>
+              <div>
+                <strong>Indica el origen y el destino.</strong>
+                <p>Escribe con claridad los puntos del recorrido.</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="numero">2</span>
+              <div>
+                <strong>Selecciona fecha y horario.</strong>
+                <p>Incluye el número de pasajeros y tipo de servicio.</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="numero">3</span>
+              <div>
+                <strong>Recibe atención personalizada.</strong>
+                <p>Confirmaremos disponibilidad y precio por WhatsApp.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <form class="formulario" id="formularioViaje">
+          <h3>Datos del viaje</h3>
+
+          <div class="form-grid">
+            <div class="campo">
+              <label for="nombre">Nombre completo</label>
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                autocomplete="name"
+                placeholder="Tu nombre"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="telefono">Teléfono</label>
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                autocomplete="tel"
+                placeholder="Tu número de contacto"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="origen">Lugar de salida</label>
+              <input
+                id="origen"
+                name="origen"
+                type="text"
+                placeholder="Ciudad, colonia o dirección"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="destino">Destino</label>
+              <input
+                id="destino"
+                name="destino"
+                type="text"
+                placeholder="Ciudad, colonia o dirección"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="fecha">Fecha del viaje</label>
+              <input id="fecha" name="fecha" type="date" required />
+            </div>
+
+            <div class="campo">
+              <label for="hora">Hora de salida</label>
+              <input id="hora" name="hora" type="time" required />
+            </div>
+
+            <div class="campo">
+              <label for="pasajeros">Número de pasajeros</label>
+              <input
+                id="pasajeros"
+                name="pasajeros"
+                type="number"
+                min="1"
+                max="100"
+                value="1"
+                required
+              />
+            </div>
+
+            <div class="campo">
+              <label for="servicio">Tipo de servicio</label>
+              <select id="servicio" name="servicio" required>
+                <option value="">Selecciona una opción</option>
+                <option>Viaje particular</option>
+                <option>Transporte empresarial</option>
+                <option>Traslado al aeropuerto</option>
+                <option>Viaje turístico</option>
+                <option>Evento especial</option>
+                <option>Viaje personalizado</option>
+              </select>
+            </div>
+
+            <div class="campo campo-completo">
+              <label for="detalles">Detalles adicionales</label>
+              <textarea
+                id="detalles"
+                name="detalles"
+                placeholder="Equipaje, paradas, viaje redondo u otra información..."
+              ></textarea>
+            </div>
+          </div>
+
+          <button class="btn btn-whatsapp" type="submit">
+            Enviar solicitud por WhatsApp
+          </button>
+
+          <p class="aviso-formulario">
+            El envío de la solicitud no confirma la reservación. La empresa
+            validará disponibilidad, ruta y precio.
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Equipo -->
+    <section class="seccion" id="equipo">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Equipo de trabajo</span>
+          <h2>Personas comprometidas con tu seguridad</h2>
+          <p>
+            Nuestro equipo trabaja para ofrecerte un servicio responsable,
+            amable y puntual.
+          </p>
+        </div>
+
+        <div class="equipo-grid">
+          <article class="miembro">
+            <div class="miembro-imagen">👨‍💼</div>
+            <div class="miembro-info">
+              <h3>Daniel Mayen</h3>
+              <span class="cargo">Dirección general</span>
+              <p>
+                Coordina las operaciones y garantiza la calidad del servicio.
+              </p>
+            </div>
+          </article>
+
+          <article class="miembro">
+            <div class="miembro-imagen">👩‍💻</div>
+            <div class="miembro-info">
+              <h3>Ian Mayen</h3>
+              <span class="cargo">Atención al cliente</span>
+              <p>Atiende solicitudes, cotizaciones y seguimiento de viajes.</p>
+            </div>
+          </article>
+
+          <article class="miembro">
+            <div class="miembro-imagen">👨‍✈️</div>
+            <div class="miembro-info">
+              <h3>Daniel Mayen</h3>
+              <span class="cargo">Operaciones</span>
+              <p>Conductores preparados para brindar recorridos seguros.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Acerca de -->
+    <section class="seccion seccion-clara" id="acerca">
+      <div class="contenedor acerca-contenido">
+        <div class="acerca-imagen" role="img" aria-label="Autobús de pasajeros">
+          <div class="experiencia">Servicio con confianza</div>
+        </div>
+
+        <div class="acerca-texto">
+          <span class="etiqueta">Acerca de nosotros</span>
+          <h2>Transportes Mayen</h2>
+
+          <p>
+            Somos una empresa dedicada al transporte de personas. Nuestro
+            propósito es conectar a nuestros pasajeros con sus destinos de
+            manera segura, cómoda y puntual.
+          </p>
+
+          <p>
+            Atendemos viajes particulares, empresariales y turísticos,
+            adaptándonos a las características de cada recorrido y grupo.
+          </p>
+
+          <div class="valores">
+            <div class="valor">✓ Responsabilidad</div>
+            <div class="valor">✓ Seguridad</div>
+            <div class="valor">✓ Puntualidad</div>
+            <div class="valor">✓ Buen servicio</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="seccion contacto" id="contacto">
+      <div class="contenedor">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Contacto</span>
+          <h2>Estamos listos para atenderte</h2>
+          <p>Comunícate con Transportes Mayen mediante tu canal preferido.</p>
+        </div>
+
+        <div class="contacto-grid">
+          <article class="contacto-item">
+            <span class="icono">💬</span>
+            <h3>WhatsApp</h3>
+            <p id="textoTelefono">+502 57962304</p>
+            <a
+              class="btn btn-whatsapp enlace-whatsapp"
+              href="https://wa.me/50257962304?text=Hola%2C%20Transportes%20Mayen.%20Deseo%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Enviar mensaje
+            </a>
+          </article>
+
+          <article class="contacto-item">
+            <span class="icono">✉️</span>
+            <h3>Gmail</h3>
+            <p id="textoCorreo">transportesmayen@gmail.com</p>
+            <a class="btn btn-correo" id="enlaceCorreo" href="#">
+              Enviar correo
+            </a>
+          </article>
+
+          <article class="contacto-item">
+            <span class="icono">📷</span>
+            <h3>Instagram</h3>
+            <p id="textoInstagram">@transportesmayen</p>
+            <a
+              class="btn btn-instagram"
+              id="enlaceInstagram"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver Instagram
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <p>
+        © <span id="anio"></span> Transportes Mayen. Todos los derechos reservados.
+      </p>
+    </div>
+  </footer>
+
+  <a
+    class="whatsapp-flotante enlace-whatsapp"
+    href="https://wa.me/50257962304?text=Hola%2C%20Transportes%20Mayen.%20Deseo%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar a Transportes Mayen por WhatsApp"
+  >
+    ☎
+  </a>
+
+  <script>
+    /*
+      CONFIGURACIÓN:
+      Reemplaza estos datos por la información real de Transportes Mayen.
+
+      whatsapp:
+      Código de país + número, sin espacios, guiones ni signo +.
+      Ejemplo para México: 5215512345678
+    */
+    const configuracion = {
+      whatsapp: "50257962304",
+      telefonoVisible: "+502 57962304",
+      correo: "luzgmayen60@gmail.com",
+      instagramUsuario: "@transportesmayen´s",
+      instagramUrl: "https://www.instagram.com/transportes_mayens/",
+    };
+
+    const menuToggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("menu");
+    const formulario = document.getElementById("formularioViaje");
+    const fecha = document.getElementById("fecha");
+
+    // Menú móvil.
+    menuToggle.addEventListener("click", () => {
+      const estaAbierto = menu.classList.toggle("activo");
+
+      document.body.classList.toggle("menu-abierto", estaAbierto);
+      menuToggle.setAttribute("aria-expanded", String(estaAbierto));
+      menuToggle.setAttribute(
+        "aria-label",
+        estaAbierto ? "Cerrar menú" : "Abrir menú"
+      );
+      menuToggle.textContent = estaAbierto ? "✕" : "☰";
+    });
+
+    menu.querySelectorAll("a").forEach((enlace) => {
+      enlace.addEventListener("click", () => {
+        menu.classList.remove("activo");
+        document.body.classList.remove("menu-abierto");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menú");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Evita elegir una fecha anterior al día actual.
+    const hoy = new Date();
+    const anio = hoy.getFullYear();
+    const mes = String(hoy.getMonth() + 1).padStart(2, "0");
+    const dia = String(hoy.getDate()).padStart(2, "0");
+    fecha.min = `${anio}-${mes}-${dia}`;
+
+    // Información de contacto.
+    document.getElementById("textoTelefono").textContent = configuracion.telefonoVisible;
+
+    document.getElementById("textoCorreo").textContent = configuracion.correo;
+
+    document.getElementById("textoInstagram").textContent = configuracion.instagramUsuario;
+
+    document.getElementById("enlaceCorreo").href = `mailto:${configuracion.correo}?subject=${encodeURIComponent(
+      "Solicitud de información - Transportes Mayen"
+    )}`;
+
+    document.getElementById("enlaceInstagram").href = configuracion.instagramUrl;
+
+    const mensajeGeneral = "Hola, Transportes Mayen. Deseo solicitar información sobre sus servicios.";
+
+    document.querySelectorAll(".enlace-whatsapp").forEach((enlace) => {
+      enlace.href = `https://wa.me/${configuracion.whatsapp}?text=${encodeURIComponent(mensajeGeneral)}`;
+    });
+
+    // Envía los datos del viaje mediante WhatsApp.
+    formulario.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+
+      if (!formulario.checkValidity()) {
+        formulario.reportValidity();
+        return;
+      }
+
+      const datos = new FormData(formulario);
+
+      const mensaje = [
+        "Hola, Transportes Mayen.",
+        "",
+        "Deseo solicitar una cotización de viaje:",
+        "",
+        `Nombre: ${datos.get("nombre")}`,
+        `Teléfono: ${datos.get("telefono")}`,
+        `Origen: ${datos.get("origen")}`,
+        `Destino: ${datos.get("destino")}`,
+        `Fecha: ${datos.get("fecha")}`,
+        `Hora: ${datos.get("hora")}`,
+        `Pasajeros: ${datos.get("pasajeros")}`,
+        `Servicio: ${datos.get("servicio")}`,
+        `Detalles: ${datos.get("detalles") || "Sin detalles adicionales"}`,
+      ].join("\n");
+
+      const url = `https://wa.me/${configuracion.whatsapp}?text=${encodeURIComponent(mensaje)}`;
+
+      window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    document.getElementById("anio").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
